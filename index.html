@@ -18,7 +18,7 @@
 
 <body>
 
-    <!-- Google Map-->
+    <!-- GOOGLE MAP WITH MARKER-->
      <h3>My Google Maps Demo</h3>
     <div id="map"></div>
 
@@ -26,11 +26,10 @@
     <script src="static/vendor/jquery-3.2.1.min.js"></script>
     <script src="static/js/script.js"></script>
     <script>
-
-      function initMap() {
+        function initMap() {
         var uluru = {lat: -25.363, lng: 131.044};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 6,
           center: uluru
         });
         var marker = new google.maps.Marker({
@@ -41,9 +40,8 @@
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPvBPW6UqXBFWjo-pLeXyUPQtGCYwjDhA&callback=initMap">
+
     </script>
-
-
 
 </body>
 </html>
