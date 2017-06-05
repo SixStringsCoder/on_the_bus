@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="static/css/normalize.css">
+        <link rel="stylesheet" href="static/css/main.css">
+</head>
+
+<body>
+
+    <!-- Google Map-->
+     <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+
+
+    <script src="static/vendor/jquery-3.2.1.min.js"></script>
+    <script src="static/js/script.js"></script>
+    <script>
+
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPvBPW6UqXBFWjo-pLeXyUPQtGCYwjDhA&callback=initMap">
+    </script>
+
+
+
+</body>
+</html>
