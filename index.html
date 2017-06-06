@@ -8,27 +8,77 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="static/css/normalize.css">
-        <link rel="stylesheet" href="static/css/main.css">
+        <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="static/css/main.css">
+        <!-- jQUERY CSS-->
+        <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.structure.min.css">
+        <link rel="stylesheet" type="text/css" href="static/css/jquery-ui.theme.min.css">
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
     <!-- GOOGLE MAP WITH MARKER-->
-     <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
+    <header><h1>On the Bus</h1></header>
+
+    <!-- GOOGLE MAP WITH MARKER-->
+    <section id="mapContainer">
+        <div id="map"></div>
+    </section>
+
+    <!-- jQuery UI SLIDER-->
+    <p id="sliderText">
+        <label for="amount">Distance:</label>
+        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    </p>
+    <div id="slider"></div>
+
+    <!-- Bus info Table-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Locatino ID#</th>
+          <th>Heading</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+
+      <tbody id="busses">
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+      </tbody>
+    </table>
 
 
-    <script src="static/vendor/jquery-3.2.1.min.js"></script>
+
+
+
+    <!--jQuery and JavaScript-->
+    <script src="static/vendor/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="static/vendor/jquery-ui.min.js" crossorigin="anonymous"></script>
     <script src="static/js/script.js"></script>
 
+    <!--Google Callback function-->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPvBPW6UqXBFWjo-pLeXyUPQtGCYwjDhA&callback=getPosition">
     </script>
+
 
 </body>
 </html>
