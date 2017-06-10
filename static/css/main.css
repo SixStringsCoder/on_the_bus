@@ -73,13 +73,26 @@ h3 {
     display: flex;
     margin: 1% auto;
     max-width: 80%;
+    background: transparent url('static/images/ajax-loader.gif') no-repeat center center;
+
 }
 
+#map:before {
+    font-family: 'Helvetica', sans-serif;
+    content: "Where are you, man?"; /* Insert content that looks like bullets */
+    display: flex;
+    justify-content: center;
+    color: #fff; /* Or a color you prefer */
+}
 
 #map {
     width: 100%;
-    height: 400px;
-    background-color: grey;
+    height: 500px;
+    background: #a500ca url('https://thumbs.dreamstime.com/z/colorful-bus-5579814.jpg') no-repeat top right ;
+    background-size: cover;
+    color: #fff;
+    font-size: 2em;
+
     box-shadow: 0 2px 3px black;
 }
 
@@ -99,10 +112,11 @@ h3 {
     border:0;
     color:#a500ca;
     font-weight:bold;
+
 }
 
 /*----------------------
-        BG and MAP
+      Bus TimeTable
 ------------------------*/
 
 .table {

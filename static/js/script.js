@@ -206,6 +206,9 @@ function clearTable() {
     $("#buses").empty();
 }
 
+/*--------------
+SLIDER FUNCTIONS
+----------------*/
 
 function updateStops(event, ui) {
     console.log('Slider just stopped');
@@ -243,8 +246,9 @@ $(function () {
 
 
 
-
-
+/*--------------
+GOOGLE FUNCTIONS
+----------------*/
 function initMap(position) {
     // GOOGLE MAP CODE to use their maps, set zoom, and use their markers connected to geolocation function below
     let here = {lat: position.coords.latitude, lng: position.coords.longitude};
@@ -254,14 +258,17 @@ function initMap(position) {
     });
     let marker = new google.maps.Marker({
         position: here,
+        label: "I'm here!",
+        animation: google.maps.Animation.BOUNCE,  //BOUNCE is another animation option
+        draggable: true,
+
         map: map
     });
     console.log("Init Map works!");
 }
 
 
-
-function getPosition() {
+let getPosition = function () {
     // If the object exists, geolocation services are available. You can test for the presence of geolocation with this code:
     if ("geolocation" in navigator) {
         /* geolocation is available */
@@ -279,5 +286,7 @@ function getPosition() {
             /* geolocation IS NOT available */
             console.log("No location available");
         }
-}
+};
 
+// Activates Button "Where am I" to load map with user's current location
+$('#im_here_btn').click(getPosition);
