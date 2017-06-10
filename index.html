@@ -11,6 +11,9 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Julee|Lakki+Reddy|Neucha|Rock+Salt|Sunshiney" rel="stylesheet">
+
         <link rel="stylesheet" type="text/css" href="static/css/normalize.css">
 
         <!-- jQUERY CSS-->
@@ -33,40 +36,57 @@
 <body>
 
     <!-- GOOGLE MAP WITH MARKER-->
-    <header><h1>On the Bus</h1></header>
+    <header>
+        <h1>On the Bus</h1>
+        <h3>You can’t catch a ride, you can’t find...</h3>
+    </header>
+
+
+    <section id="mid-section">
+        <!-- BUTTONS FOR GETTING STARTED-->
+        <button id="im_here_btn">Where I'm At</button>
+        <button id="buses_here_btn">The Bus Stops</button>
+    </section>
+
 
     <!-- GOOGLE MAP WITH MARKER-->
-    <section id="mapContainer">
-        <div id="map"></div>
-    </section>
+
+        <section id="mapContainer">
+            <div id="map"></div>
+        </section>
+
 
     <!-- jQuery UI SLIDER-->
     <p id="sliderText">
-        <label for="amount">Distance:</label>
-        <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        <label for="amount">Search Distance:</label>
+        <input type="text" id="amount" readonly>
     </p>
     <div id="slider"></div>
 
+
+
     <!-- Bus info Table-->
     <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Departure Time</th>
-          <th>Direction</th>
-          <th>Location</th>
-        </tr>
-      </thead>
+        <thead>
+            <tr>
+              <!-- Table Headings -->
+              <th></th>
+              <th>Leaves at</th>
+              <th>Direction</th>
+              <th>Location</th>
+            </tr>
+        </thead>
 
-      <tbody id="busses">
-        <!--<tr></tr>-->
-        <!--<tr></tr>-->
-        <!--<tr></tr>-->
-      </tbody>
+        <tbody id="buses">
+        <!-- BUS STOP DETAILS POPULATE FROM GOOGLE GEOLOCATION FUNCTION-->
+        </tbody>
+
     </table>
 
 
-
+    <footer>
+        <p id="copyright">copyright 2017 On-the-Bus App</p>
+    </footer>
 
 
     <!--jQuery and JavaScript-->

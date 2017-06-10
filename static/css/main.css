@@ -1,22 +1,78 @@
-
+/*----------------------
+        HEADER
+------------------------*/
 header {
-    height: 12vh;
+    height: 20%;
     background: yellow;
     padding: 20px;
     margin: 0;
     box-shadow: 0 1px 1px black;
 }
 
+
 h1 {
     text-align: center;
-    margin: 0;
-    font-size: 4em;
+    margin: 20px 0 0 0;
+    font-size: 5em;
+    font-family: 'Lakki Reddy', cursive;
 }
+
+
+h3 {
+    text-align: center;
+    margin:0;
+    font-size: 3em;
+    font-family: 'Indie Flower', cursive;
+    color: #a500ca;
+
+}
+
+
+/*----------------------
+        BUTTONS
+------------------------*/
+
+
+#mid-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+ button {
+    margin: 1%;
+    width: 200px;
+    height: 100px;
+    padding: 18px 10px 10px 10px;
+    font-family: 'Lakki Reddy', cursive;
+    font-size: 1.7em;
+    border-radius: 25px;
+    vertical-align: middle;
+    text-align: center;
+    outline: none;
+ }
+
+ #im_here_btn {
+    background-color: black;
+    color: #00ff00;
+ }
+
+ #buses_here_btn {
+    background-color: #ff00d4;
+    color: #fff;
+ }
+
+
+
+/*----------------------
+        BG and MAP
+------------------------*/
 
 #mapContainer {
     display: flex;
-    margin: 2% auto;
-    width: 50%;
+    margin: 1% auto;
+    max-width: 80%;
 }
 
 
@@ -29,9 +85,55 @@ h1 {
 
 #slider {
     width: 30%;
-    margin: 10px auto;
+    margin: 10px auto 30px;
 }
 
 #sliderText {
-    margin-left: 47%;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.3em;
+    margin-left: 43%;
+}
+
+/* Slider Text */
+#amount {
+    border:0;
+    color:#a500ca;
+    font-weight:bold;
+}
+
+/*----------------------
+        BG and MAP
+------------------------*/
+
+.table {
+    /*width: 50%;*/
+    margin: 0;
+    background-color: yellow;
+}
+
+th, td {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.5em;
+}
+
+
+
+/*----------------------
+  FOOTER AND COPYRIGHT
+------------------------*/
+
+footer {
+    display: flex;
+    justify-content: center;
+    height: 60%;
+    background: #a500ca;
+    padding: 20px;
+    margin: 0;
+    box-shadow: 0 1px 1px black;
+}
+
+#copyright {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.2em;
+    color: #fff;
 }

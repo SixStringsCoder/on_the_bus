@@ -9,8 +9,15 @@ let stopMarkers = [];
 
 
 
+// $('#buses_here_btn').on('click', function (event, ui) {
+//             console.log('Button works');
+//
+//     });
+
+
+
 function addStopToTable(index, bus){
-    //Make some HTML table with jQuery
+    //Make Bus Schedule HTML table with jQuery
 
     // <tr>
     //   <th scope="row">1</th>
@@ -19,19 +26,19 @@ function addStopToTable(index, bus){
     //   <td>@fat</td>
     // </tr>
 
-    let busStopIndex = $('<th>', {'scope': 'row'}).text(index+1);
+
+    let busStopIndex = $('<th>', {'scope': 'row'});
     let busLocID = $('<td>').text(bus.locid);
     let busStopDesc = $('<td>').text(bus.desc);
     let busHeading = $('<td>').text(bus.dir);
     let busStopRow = $('<tr>').append(busStopIndex, busLocID, busHeading, busStopDesc);
 
-    $('#busses').append(busStopRow);
+    $('#buses').append(busStopRow);
 }
 
 
 function addMarker(busStop) {
     // Make Info Windows
-
 
     let contentString = makeInfoWindow(busStop);
 
@@ -53,12 +60,11 @@ function addMarker(busStop) {
         infowindow.open(map, stopMarker);
     });
 
-    stopMarkers.push(stopMarker);                        // Push this to stopMarker to the markers array
-}  // END addMarkers function
+    stopMarkers.push(stopMarker);                        // Push to stopMarker array
+}
 
 
-
-function makeInfoWindow(busStop) {
+function makeInfoWindow(busStop, busArrTime) {
     //Generates and adds info-window HTML and Google Map marker objects
 
     // desc:"SW Kelly & Corbett"
@@ -67,34 +73,21 @@ function makeInfoWindow(busStop) {
     // lng:-122.675276776225
     // locid:3116
 
-
     let $headings = $('<h5>', {id: "firstHeading"}, {class: "firstHeading"}).text('Bus: #' + busStop.locid);
 
-    let $bodyContent = $('<div>', {id: "bodyContent"})
-    let $busDetails = $('<p>', {id: "busDetails"}).text('Direction:' + busStop.dir + '<br>' + 'Stop Location:' + busStop.desc);
+    let $bodyContent = $('<div>', {id: "bodyContent"}).text('Bus: #');
+    let $busDetails = $('<p>', {id: "busDetails"}).text('Direction:' + busStop.dir + 'Stop Location:' + busStop.desc);
 
     let $content = $('<main>').append($headings, $bodyContent);
     return $content.html();
 }
 
 
-function addBusStopMarkers(busStops) {
-    //Adds a collections of buses to map and table
-    let iconBase = 'static/images/tourist-bus-icon_lg.png';
-
-    $.each(busStops, function (index, busStop) {
-        addStopToTable(index, busStop);                     // Add this to stopMarker to the table
-        addMarker(busStop);                                 // Add this to stopMarker to the map
-
-        console.log(busStop);
-    });
-}
-
-
-
+// AJAX REQUEST for ARRIVAL TIMES
 function fetchArrivals(locID) {
-    // AJAX REQUEST to Get ARRIVAL TIMES
     let data;
+
+    //MAYBE EACH LOOP HERE TO GEt LOCID FROM BUSES AJAX CALL
 
     //Object Request
     let arrive_params = {
@@ -109,10 +102,11 @@ function fetchArrivals(locID) {
         method: 'GET',
         data: arrive_params,
         success: function (response) {
+            console.log("AJAX fetchArrivals success!");
             console.log(response);
             data = response;
-            let busTimes = response.resultSet.arrival;
-            // addBusStopMarkers(busses);
+            let busArrTimes = response.resultSet.arrival;
+            addStopToTable(busArrTimes.estimated);
         },
         error: function (error) {
             console.log(error);
@@ -120,13 +114,26 @@ function fetchArrivals(locID) {
     });
 }
 
+function addBusStopMarkers(busStops) {
+    //Adds a collections of buses to map and table
+    let iconBase = 'static/images/tourist-bus-icon_lg.png';
+
+    $.each(busStops, function (index, busStop) {
+        console.log("AddBusStopMarkers works!");
+        addStopToTable(index, busStop);                     // Adds stopMarker to the table
+        addMarker(busStop);                                 // Adds stopMarker to the map
+        fetchArrivals(busStop.locid);
+        console.log(busStop);
+
+    });
+}
 
 
-
+// AJAX REQUEST for LAT LONG and METERS
 function fetch(here, meters) {
-    // AJAX REQUEST
+    //Sets meters to a default value (e.g. 600) if undefined
     if ( typeof meters === 'undefined' ) {
-        let meters = '100';
+        let meters = '600';
     }
     let data;
 
@@ -139,7 +146,6 @@ function fetch(here, meters) {
         'json': 'true',
         'll': `${lat}, ${long}`,
         'meters': meters
-        // 'Arr': arrTime,
     };
 
     $.ajax({
@@ -147,10 +153,11 @@ function fetch(here, meters) {
         method: 'GET',
         data: req_params,
         success: function (response) {
+            console.log("AJAX Fetch Location success!");
             console.log(response);
             data = response;
-            let busses = response.resultSet.location;
-            addBusStopMarkers(busses);
+            let buses = response.resultSet.location;
+            addBusStopMarkers(buses);
         },
         error: function (error) {
             console.log(error);
@@ -167,6 +174,9 @@ function setMapOnAll(map) {
 }
 
 
+/*-----------------------------
+  GOOGLE CODE TO CLEAR MARKERS
+ ----------------------------*/
 function clearMarkers() {
     // Removes the markers from the map, but keeps them in the array.
     setMapOnAll(null);
@@ -188,12 +198,12 @@ function deleteMarkers() {
 
 function clearMap() {
     // Clears all the markers from the map
-
 }
+
 
 function clearTable() {
     // Clears all the records from the table
-    $("#busses").empty();
+    $("#buses").empty();
 }
 
 
@@ -216,9 +226,9 @@ function updateStops(event, ui) {
 
 
 $(function () {
-    // jQuery UI Snap to Increment slider
+    // jQuery UI Snap-to Increment SLIDER
     let options = {
-        value: 100, min: 0, max: 1000, step: 100,
+        value: 600, min: 0, max: 1000, step: 100,
         slide: function (event, ui) {
             $("#amount").val(ui.value + " meters");
         },
@@ -228,22 +238,27 @@ $(function () {
     $("#slider").slider(options);
 
     $("#amount").val($("#slider").slider("value") + " meters");
-
-
 });
 
 
+
+
+
+
 function initMap(position) {
+    // GOOGLE MAP CODE to use their maps, set zoom, and use their markers connected to geolocation function below
     let here = {lat: position.coords.latitude, lng: position.coords.longitude};
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 14,
         center: here
     });
     let marker = new google.maps.Marker({
         position: here,
         map: map
     });
+    console.log("Init Map works!");
 }
+
 
 
 function getPosition() {
